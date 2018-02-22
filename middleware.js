@@ -7,22 +7,22 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var helmet = require('helmet');
 
-function middleware (basecontroller){
+function middleware (basecontroller, basedir){
 
 	var app = express();
 
 	// view engine setup
-	app.set('views', path.join(__dirname, 'views'));
+	app.set('views', path.join(basedir, 'views'));
 	app.set('view engine', 'hbs');
 
 	// uncomment after placing your favicon in /public
-	app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+	app.use(favicon(path.join(basedir, 'public', 'favicon.ico')));
 	app.use(compression())
 	app.use(logger('dev'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cookieParser());
-	app.use(express.static(path.join(__dirname, 'public')));
+	app.use(express.static(path.join(basedir, 'public')));
 	app.use(helmet());
 
 	basecontroller(app);
