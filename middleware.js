@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var helmet = require('helmet');
 
-function middleware (controller, rootdir, theme){
+function middleware (controller, rootdir){
 
 	var app = express();
 
@@ -16,13 +16,13 @@ function middleware (controller, rootdir, theme){
 	app.set('view engine', 'hbs');
 
 	// uncomment after placing your favicon in /public
-	app.use(favicon(path.join(rootdir, 'public', theme, 'favicon.ico')));
+	app.use(favicon(path.join(rootdir, 'public', 'favicon.ico')));
 	app.use(compression())
 	app.use(logger('dev'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cookieParser());
-	app.use(express.static(path.join(rootdir, 'public', theme)));
+	app.use(express.static(path.join(rootdir, 'public')));
 	app.use(helmet());
 
 	controller(app);
