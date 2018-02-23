@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var helmet = require('helmet');
 
-function middleware (controller, rootdir){
+function middleware (controller){
+	var rootdir = env.rootdir || __dirname;
 
 	var app = express();
 
