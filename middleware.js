@@ -7,25 +7,25 @@ var bodyParser = require('body-parser');
 var compression = require('compression');
 var helmet = require('helmet');
 
-function middleware (basecontroller, basedir){
+function middleware (controller, rootdir){
 
 	var app = express();
 
 	// view engine setup
-	app.set('views', path.join(basedir, 'views'));
+	app.set('views', path.join(rootdir, 'views'));
 	app.set('view engine', 'hbs');
 
 	// uncomment after placing your favicon in /public
-	app.use(favicon(path.join(basedir, 'public', 'favicon.ico')));
+	app.use(favicon(path.join(rootdir, 'public', 'favicon.ico')));
 	app.use(compression())
 	app.use(logger('dev'));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cookieParser());
-	app.use(express.static(path.join(basedir, 'public')));
+	app.use(express.static(path.join(rootdir, 'public')));
 	app.use(helmet());
 
-	basecontroller(app);
+	controller(app);
 
 	// catch 404 and forward to error handler
 	app.use(function(req, res, next) {
