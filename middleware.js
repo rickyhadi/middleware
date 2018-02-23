@@ -22,7 +22,7 @@ function middleware (controller, rootdir){
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(cookieParser());
-	app.use(express.static(path.join(rootdir, 'public')));
+	app.use([/^\/public\/config($|\/)/, '/public'],express.static(path.join(rootdir, 'public')));
 	app.use(helmet());
 
 	controller(app);
